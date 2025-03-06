@@ -1,6 +1,6 @@
 import SignInContent from './signInContent/SignInContent';
 
-export default function signInBody() {
+export default function SignInBody() {
   return (
     <main className="main bg-dark">
       <SignInContent />

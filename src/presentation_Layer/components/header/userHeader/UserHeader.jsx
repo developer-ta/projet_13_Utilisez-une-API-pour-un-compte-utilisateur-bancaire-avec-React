@@ -14,7 +14,7 @@ export default function UserHeader() {
           <h1 className="sr-only">Argent Bank</h1>
         </Link>
         <div>
-          <Link className="main-nav-item" to="/user">
+          <Link className="main-nav-item" to="/profile">
             <i className="fa fa-user-circle"></i>
             Tony
           </Link>
