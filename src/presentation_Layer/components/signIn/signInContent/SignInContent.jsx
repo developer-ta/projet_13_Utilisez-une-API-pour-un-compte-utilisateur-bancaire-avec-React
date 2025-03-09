@@ -3,7 +3,8 @@ import './SignInContent.scss';
 import useLogin from '../../../hooks/useLogin';
 
 export default function SignInContent() {
-  const { setUserLogin } = useLogin();
+  const { setUserLogin,messageInvalidEmail } = useLogin();
+  console.log('messageInvalidEmail: ', messageInvalidEmail);
   return (
     <section className="sign-in-content">
       <i className="fa fa-user-circle sign-in-icon"></i>

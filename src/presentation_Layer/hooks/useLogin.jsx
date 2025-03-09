@@ -1,15 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux';
 import UserLoginRepo from '../../infrastructure_Layer/api/user/login/userLoginRepo';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import UserLoginService from '../../application_Layer/services/userLoginService';
 import { setLogin } from '../../infrastructure_Layer/redux/slices/user/userLogin';
 import { UserLogin } from '../../domain_Layer/userLogin';
 
 export default function useLogin() {
   const { userLogin } = useSelector((state) => state.userLoginReducer);
-
+  const [isValide, setIsValid] = useState(true);
   const dispatch = useDispatch();
-  let data = {};
+  let isInvalidIdentifie = false;
+  let messageInvalidEmail = '';
+  let messageInvalideIdentifie = '';
   const userLoginRepo = new UserLoginRepo();
   const loginService = new UserLoginService(userLoginRepo);
   const loginData = new UserLogin();
@@ -24,13 +26,26 @@ export default function useLogin() {
     loginData.passWord = formLoginData.password.value;
     loginData.email = formLoginData.username.value;
     loginData.isAuthMemo = formLoginData[2].checked;
+    //check email
+    isInvalidIdentifie = loginService.validateEmail(loginData.email);
+    if (!isInvalidIdentifie) {
+      setIsValid((isValide) => (isValide = false));
+      messageInvalidEmail = "L'email que vous avez saisi n'est pas au format correct";
+      return;
+    }
+    // check token
     loginData.token = await loginService.getToken(loginData);
     if (loginData.token) {
+      dispatch(setLogin({ ...loginData }));
+    } else {
+      setIsValid((isValide) => (isValide = false));
+      messageInvalideIdentifie =
+        "L'adresse email ou le mot de passe que vous avez saisis est incorrect. Veuillez vérifier et réessayer.";
+      return;
+    }
+    if (loginData.isAuthMemo) {
       loginService.persistToken(loginData.token);
     }
-    dispatch(setLogin({...loginData}));
-  
-    console.log('userLogin: ', userLogin);
   });
   // const setUserLogin = useCallback(async (formLoginData) => {
   //   const loginData = {};
@@ -49,5 +64,10 @@ export default function useLogin() {
 
   return {
     setUserLogin,
+    userLogin,
+    isInvalidIdentifie,
+    messageInvalidEmail,
   };
 }
+
+

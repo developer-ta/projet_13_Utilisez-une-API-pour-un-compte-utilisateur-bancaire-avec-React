@@ -1,21 +1,5 @@
 import UserLoginRepo from '../../infrastructure_Layer/api/user/login/userLoginRepo';
 
-/**
- *
- * @param {UserLoginRepo} userLoginRepo
- * @returns
- */
-// export default async function userLoginService(userLoginRepo) {
-//    const res =await userLoginRepo.postUserLogin();
-//    if (res.token) {
-
-//    }
-//   return res;
-// }
-
-/**
- *
- */
 export default class UserLoginService {
   constructor(userLoginRepo) {
     this._userLoginRepo = userLoginRepo;
@@ -28,5 +12,10 @@ export default class UserLoginService {
   }
   persistToken(token) {
     this._userLoginRepo.saveToken(token);
+  }
+  validateEmail(email) {
+    const pattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
+    const isValid = pattern.test(email);
+    return isValid;
   }
 }
