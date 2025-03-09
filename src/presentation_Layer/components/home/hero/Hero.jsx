@@ -1,13 +1,9 @@
 
 import { useDispatch, useSelector } from 'react-redux';
 import './Hero.scss';
-import {
-  decrement,
-  increment,
-  addToNum,
-  fetchChannels,
-} from '../../../../application_Layer/redux/slices/userSlice';
+
 import { useEffect } from 'react';
+import { addToNum, fetchChannels, increment } from '../../../../infrastructure_Layer/redux/slices/userSlice';
 
 export default function Hero() {
   const { userProfile } = useSelector((state) => state.userReducer);
