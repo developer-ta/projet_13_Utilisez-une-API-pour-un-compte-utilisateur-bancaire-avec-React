@@ -3,8 +3,8 @@ import './SignInContent.scss';
 import useLogin from '../../../hooks/useLogin';
 
 export default function SignInContent() {
-  const { setUserLogin,messageInvalidEmail } = useLogin();
-  console.log('messageInvalidEmail: ', messageInvalidEmail);
+  const { setUserLogin, messageInvalidEmail, userLogin, messageInvalideIdentifie } = useLogin();
+
   return (
     <section className="sign-in-content">
       <i className="fa fa-user-circle sign-in-icon"></i>
@@ -27,6 +27,9 @@ export default function SignInContent() {
         <div className="input-remember">
           <input type="checkbox" id="remember-me" />
           <label htmlFor="remember-me">Remember me</label>
+        </div>
+        <div style={{ color: 'red', fontSize: '10px' }}>
+          <p>{messageInvalidEmail || messageInvalideIdentifie}</p>
         </div>
 
         {/* <Link to="/profile" className="sign-in-button">

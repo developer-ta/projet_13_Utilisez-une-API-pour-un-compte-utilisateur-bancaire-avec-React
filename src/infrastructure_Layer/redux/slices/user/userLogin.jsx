@@ -19,7 +19,7 @@ const userLoginSlice = createSlice({
   },
 });
 
-console.log('userLoginSlice: ', userLoginSlice);
+
 
 export const { setLogin, checkIsAuthSecede } = userLoginSlice.actions;
 

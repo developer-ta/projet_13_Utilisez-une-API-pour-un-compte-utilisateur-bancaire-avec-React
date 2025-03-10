@@ -9,8 +9,6 @@ export default function Hero() {
   const { userProfile } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
-  console.log('dispatch: ', dispatch(increment()).type);
-  console.log('userProfile: ', userProfile);
 useEffect(()=>{
   dispatch(fetchChannels())
 },[dispatch])

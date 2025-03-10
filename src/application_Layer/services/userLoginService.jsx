@@ -6,6 +6,7 @@ export default class UserLoginService {
   }
 
   async getToken(data) {
+    
     const token = await this._userLoginRepo.postUserLogin(data);
 
     return token;
@@ -17,5 +18,8 @@ export default class UserLoginService {
     const pattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
     const isValid = pattern.test(email);
     return isValid;
+  }
+  toProfilePage(navigate, token) {
+    token && navigate('/profile', { token: token });
   }
 }

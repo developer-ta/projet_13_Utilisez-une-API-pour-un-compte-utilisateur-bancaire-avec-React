@@ -8,15 +8,13 @@ const accounts = [
   { title: 'Argent Bank Credit Card (x8349)', amount: '$184.30', description: 'Current Balance' },
 ];
 export default function UserBody() {
-  console.log('UserBody');
+  
 
   return (
     <main className="main bg-dark">
       <EditName />
       {accounts.map((account, index) => {
-        console.log('account: ', account);
-
-       return <UserAccount key={index} account={account} />;
+        return <UserAccount key={index} account={account} />;
       })}
     </main>
   );

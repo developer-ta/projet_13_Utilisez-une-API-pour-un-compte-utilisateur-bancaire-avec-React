@@ -3,15 +3,15 @@ import { fetchWriteData } from '../../../common/fetchWriteData';
 export default class UserLoginRepo {
   constructor() {
     this.hrefUrl = 'http://localhost:3001/api/v1/user/login';
-    this.postBody = 
+    // this.postBody;
     this.requestMethod = 'POST';
     // this.res = null;
     this.token = '';
   }
 
   postUserLogin = async (data) => {
-    this.postBody = JSON.stringify(data);
-    const result = await fetchWriteData(this.hrefUrl, this.requestMethod, this.postBody);
+   
+    const result = await fetchWriteData(this.hrefUrl, this.requestMethod, data);
     if (result) {
       this.token = result;
 

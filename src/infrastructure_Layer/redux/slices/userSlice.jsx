@@ -9,7 +9,7 @@ const userReducerFuncs = {
     state.userProfile.id = 'decrement';
   },
   addToNum: (state, action) => {
-    console.log('action: ', action);
+    
     state.userProfile.email = action.payload;
   },
 };
