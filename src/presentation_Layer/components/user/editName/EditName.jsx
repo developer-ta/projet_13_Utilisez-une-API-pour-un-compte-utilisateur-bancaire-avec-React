@@ -4,7 +4,8 @@ import useProfile from '../../../hooks/useProfile';
 import useEditProfile from '../../../hooks/useEditProfile';
 
 export default function EditName({ firstName, lastName }) {
-  const { userProfile, isEditMode, setUserProfile, editModeHandler } = useEditProfile();
+  const { userProfile, isEditMode, setUserProfile, editModeHandler, messageInvalid } =
+    useEditProfile();
 
   return (
     <>
@@ -20,7 +21,6 @@ export default function EditName({ firstName, lastName }) {
           </button>
         )}
         {!isEditMode && (
-
           <form
             className="formEditProfile"
             onSubmit={(e) => {
@@ -34,6 +34,9 @@ export default function EditName({ firstName, lastName }) {
             <div className="inputSection">
               <button type="submit">Save</button>
               <button type="button">Cancel</button>
+            </div>
+            <div style={{ color: 'red', fontSize: '12px' }}>
+              <p>{messageInvalid}</p>
             </div>
           </form>
         )}

@@ -1,40 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { UserLogin } from '../../../../domain_Layer/userLogin';
+
 
 const userProfileSlice = createSlice({
   name: 'userProfile',
   initialState: { userProfile: {} },
   reducers: {
     setProfile: function (state, action) {
-	
       const { payload } = action;
-	 
+
       state.userProfile = payload;
-	  
-     
+    },
+    updateProfile: function (state, action) {
+      const { firstName, lastName, id } = action.payload;
+      console.log(' action.payload: ', action.payload);
+
+      state.userProfile.firstName = firstName;
+      state.userProfile.lastName = lastName;
+      state.userProfile.id = id;
     },
   },
 });
 
-export const { setProfile } = userProfileSlice.actions;
+export const { setProfile, updateProfile } = userProfileSlice.actions;
 
 const profileReducer = userProfileSlice.reducer;
 export default profileReducer;
 
-//async func
-// export const fetchlo = () => {
-//   return async (dispatch) => {
-//     const res = await fetch('http://localhost:3001/',{
-
-// 	});
-//     if (res.ok) {
-//       console.log('res.ok: ', res.ok);
-//       const resText = await res.text();
-//       dispatch(addToNum(resText));
-
-//       return;
-//     }
-//     console.log('res.status: ', res.status);
-//   };
-// };
