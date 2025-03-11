@@ -22,11 +22,6 @@ useEffect(()=>{
         <p className="subtitle">No minimum deposit.</p>
         <p className="subtitle">High interest rates.</p>
         <p className="text">Open a savings account with Argent Bank today!</p>
-        <button onClick={() => dispatch(increment())}>{userProfile.id}</button>
-        <button onClick={() => dispatch(addToNum('cli@gmail.fr'))}>
-          {userProfile.email || 'email'}
-        </button>
-        
       </section>
     </div>
   );

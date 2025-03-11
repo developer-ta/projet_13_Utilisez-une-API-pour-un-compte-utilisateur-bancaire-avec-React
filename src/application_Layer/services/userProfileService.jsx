@@ -9,4 +9,9 @@ export default class UserProfileService {
     return body;
   }
 
+  getToken(){
+    const token =  localStorage.getItem('authToken');
+    if (token) navigate('/login');
+  }
+
 }

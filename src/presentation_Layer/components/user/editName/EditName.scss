@@ -11,3 +11,35 @@
 	color: #fff;
 	margin-bottom: 2rem;
   }
+
+  form.formEditProfile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.buttonSection {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 42%;
+}
+
+.inputSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    /* width: 10%; */
+    align-content: center;
+}
+
+input#editName {
+    margin: 10px;
+    margin-left: 0px;
+}
+
+button {
+    margin: 9px;
+}

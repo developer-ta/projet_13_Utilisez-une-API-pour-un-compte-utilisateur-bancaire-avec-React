@@ -13,7 +13,7 @@ export default function UserBody() {
   const { firstName, lastName } = userProfile;
   return (
     <main className="main bg-dark">
-      <EditName firstName={firstName} lastName={lastName}/>
+      <EditName firstName={firstName} lastName={lastName} />
       {accounts.map((account, index) => {
         return <UserAccount key={index} account={account} />;
       })}
