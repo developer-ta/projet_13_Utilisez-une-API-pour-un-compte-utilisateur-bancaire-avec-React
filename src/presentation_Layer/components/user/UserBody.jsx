@@ -1,3 +1,4 @@
+import useProfile from '../../hooks/useProfile';
 import EditName from './editName/EditName';
 import UserAccount from './userAccount/UserAccount';
 import './UserBody.scss';
@@ -8,11 +9,11 @@ const accounts = [
   { title: 'Argent Bank Credit Card (x8349)', amount: '$184.30', description: 'Current Balance' },
 ];
 export default function UserBody() {
-  
-
+  const { userProfile } = useProfile();
+  const { firstName, lastName } = userProfile;
   return (
     <main className="main bg-dark">
-      <EditName />
+      <EditName firstName={firstName} lastName={lastName}/>
       {accounts.map((account, index) => {
         return <UserAccount key={index} account={account} />;
       })}

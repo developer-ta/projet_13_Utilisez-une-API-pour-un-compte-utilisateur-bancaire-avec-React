@@ -1,29 +1,22 @@
-export async function fetchWriteData(hrefUrl, reqMethod, reqBody) {
+export async function fetchWriteData(hrefUrl, reqMethod, reqBody, token) {
   try {
-  
     const res = await fetch(hrefUrl, {
       method: reqMethod,
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        Authorization: token && 'Bearer ' + token,
       },
-      body: JSON.stringify(reqBody),
+
+      body: reqBody && JSON.stringify(reqBody),
     });
-    // const res = await fetch('http://localhost:3001/api/v1/user/login', {
-    //   method: 'POST',
-    //   headers: {
-    //     Accept: 'application/json',
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     email: 'tony@stark.com',
-    //     password: 'password123',
-    //   }),
-    // });
 
     let message = '';
     if (!res.ok) {
-      message = res.status == 400 ? 'Invalid Fields' : 'Internal Server Error';
+      if (res.status == 400) message = 'Invalid Fields';
+      else if (res.status == 500) message = 'Internal Server Error';
+      else if (res.status == 401) message = 'Cannot read properties of undefined (reading "trim")';
+
       throw new Error(`Response status: ${res.status} => ${message}`);
     }
     message = 'Login Successfully';

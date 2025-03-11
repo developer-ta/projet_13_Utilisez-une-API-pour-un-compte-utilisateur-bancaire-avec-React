@@ -12,6 +12,7 @@ export default class UserLoginService {
     return token;
   }
   persistToken(token) {
+    console.log('persistToken: ', token);
     this._userLoginRepo.saveToken(token);
   }
   validateEmail(email) {
@@ -20,6 +21,7 @@ export default class UserLoginService {
     return isValid;
   }
   toProfilePage(navigate, token) {
-    token && navigate('/profile', { token: token });
+   
+    token && navigate('/profile', { state: token });
   }
 }

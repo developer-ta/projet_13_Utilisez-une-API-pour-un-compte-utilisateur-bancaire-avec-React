@@ -9,7 +9,9 @@ import { useNavigate } from 'react-router-dom';
 export default function useLogin() {
   const [messageInvalidEmail, setMessageInvalidEmail] = useState('');
   const [messageInvalideIdentifie, setMessageInvalideIdentifie] = useState('');
+
   const navigate = useNavigate();
+
   const { userLogin } = useSelector((state) => state.userLoginReducer);
   const dispatch = useDispatch();
 
@@ -37,10 +39,13 @@ export default function useLogin() {
     }
 
     // check token
-    loginData.token = await loginService.getToken({
+    const resToken = await loginService.getToken({
       email: loginData.email,
       password: loginData.passWord,
     });
+
+    loginData.token = resToken.body.token;
+
     if (!loginData.passWord.trim() || !loginData.token) {
       setMessageInvalideIdentifie(
         "L'adresse email ou le mot de passe ne peut pas être vide et doit être correct. Veuillez vérifier vos informations et réessayer."
@@ -55,7 +60,7 @@ export default function useLogin() {
       loginService.persistToken(loginData.token);
     }
   });
-  // const setUserLogin = useCallback(async (formLoginData) => {
+
   //   const loginData = {};
   //   loginData.passWord = formLoginData.password.value;
   //   loginData.email = formLoginData.username.value;
@@ -69,7 +74,6 @@ export default function useLogin() {
   //   dispatch(setLogin(data));
   //   console.log('data: ', data);
   // });
-
   return {
     setUserLogin,
     userLogin,

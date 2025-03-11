@@ -1,14 +1,18 @@
+import { useLocation, useParams } from 'react-router-dom';
 import './EditName.scss';
+import useProfile from '../../../hooks/useProfile';
 
-export default function EditName() {
+export default function EditName({firstName,lastName}) {
+
+
+
   return (
     <>
-      {' '}
       <div className="header">
         <h1>
           Welcome back
           <br />
-          Tony Jarvis!
+          {firstName} {lastName}!
         </h1>
         <button className="edit-button">Edit Name</button>
       </div>
