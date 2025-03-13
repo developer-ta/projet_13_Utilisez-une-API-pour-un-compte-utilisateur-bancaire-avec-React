@@ -4,8 +4,14 @@ import useProfile from '../../../hooks/useProfile';
 import useEditProfile from '../../../hooks/useEditProfile';
 
 export default function EditName({ firstName, lastName }) {
-  const { userProfile, isEditMode, setUserProfile, editModeHandler, messageInvalid } =
-    useEditProfile();
+  const {
+    userProfile,
+    isEditMode,
+    setUserProfile,
+    editModeHandler,
+    messageInvalid,
+    cancelHandler,
+  } = useEditProfile();
 
   return (
     <>
@@ -28,12 +34,14 @@ export default function EditName({ firstName, lastName }) {
             }}
           >
             <div className="buttonSection">
-              <input type="text" id="firstName" placeholder={firstName} />
-              <input type="text" id="lastName" placeholder={lastName} />
+              <input type="text" id="firstName" className="input-edit" placeholder={firstName} />
+              <input type="text" id="lastName" className="input-edit" placeholder={lastName} />
             </div>
             <div className="inputSection">
               <button type="submit">Save</button>
-              <button type="button">Cancel</button>
+              <button type="button" onClick={cancelHandler}>
+                Cancel
+              </button>
             </div>
             <div style={{ color: 'red', fontSize: '12px' }}>
               <p>{messageInvalid}</p>

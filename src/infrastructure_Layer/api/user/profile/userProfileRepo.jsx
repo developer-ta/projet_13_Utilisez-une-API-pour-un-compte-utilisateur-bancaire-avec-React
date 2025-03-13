@@ -31,7 +31,5 @@ export default class UserProfileRepo {
     return null;
   };
 
-  saveToken = (token) => {
-    localStorage.setItem('AuthToken', token);
-  };
+
 }

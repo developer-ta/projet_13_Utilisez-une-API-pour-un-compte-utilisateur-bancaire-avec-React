@@ -12,7 +12,7 @@ export default class UserLoginService {
     return token;
   }
   persistToken(token) {
-    console.log('persistToken: ', token);
+   
     this._userLoginRepo.saveToken(token);
   }
   validateEmail(email) {

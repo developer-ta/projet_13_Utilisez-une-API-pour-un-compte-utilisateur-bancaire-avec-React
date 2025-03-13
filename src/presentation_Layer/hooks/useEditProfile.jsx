@@ -26,7 +26,7 @@ export default function useEditProfile() {
     profile.lastName = formData.lastName.value;
     //check input
     if (!profile.firstName.trim() || !profile.lastName.trim()) {
-      setMessageInvalid('firstName ou lastName ne peut pas être vide ');
+      setMessageInvalid('Attention ! firstName ou lastName ne peut pas être vide ');
       return;
     } else {
       editModeHandler();
@@ -47,6 +47,16 @@ export default function useEditProfile() {
   const editModeHandler = useCallback(() => {
     setIsEditMode((mode) => !mode);
   });
+  const cancelHandler = useCallback(() => {
+    setIsEditMode((mode) => !mode);
+  });
 
-  return { setUserProfile, userProfile, editModeHandler, isEditMode, messageInvalid };
+  return {
+    setUserProfile,
+    userProfile,
+    editModeHandler,
+    isEditMode,
+    messageInvalid,
+    cancelHandler,
+  };
 }

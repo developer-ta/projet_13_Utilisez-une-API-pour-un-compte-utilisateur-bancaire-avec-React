@@ -19,6 +19,7 @@ export async function fetchWriteData(hrefUrl, reqMethod, reqBody, token) {
 
       throw new Error(`Response status: ${res.status} => ${message}`);
     }
+
     message = 'Login Successfully';
     console.log(`Response status: ${res.status} => ${message}`);
     return res.json();

@@ -14,7 +14,7 @@ export default class UserLoginRepo {
 
       return this.token;
     }
-    return this.token;
+    return '';
   };
 
   saveToken = (token) => {
