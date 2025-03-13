@@ -33,7 +33,7 @@ export default function useEditProfile() {
       setMessageInvalid((m) => (m = ''));
     }
 
-    const token = state || profileService.getToken(navigate);
+    const token = state || profileService.getToken();
     if (token) {
       const data = {
         firstName: profile.firstName,
@@ -41,7 +41,9 @@ export default function useEditProfile() {
       };
       const res = await profileService.updateProfile(token, data);
       dispatch(updateProfile({ ...res }));
-    }
+    }else{
+profileService.redirectionToLogin(navigate)
+	}
   });
 
   const editModeHandler = useCallback(() => {
@@ -49,6 +51,7 @@ export default function useEditProfile() {
   });
   const cancelHandler = useCallback(() => {
     setIsEditMode((mode) => !mode);
+    setMessageInvalid((m) => (m = ''));
   });
 
   return {

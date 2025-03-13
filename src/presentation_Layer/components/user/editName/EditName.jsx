@@ -1,6 +1,4 @@
-import { useLocation, useParams } from 'react-router-dom';
 import './EditName.scss';
-import useProfile from '../../../hooks/useProfile';
 import useEditProfile from '../../../hooks/useEditProfile';
 
 export default function EditName({ firstName, lastName }) {
@@ -19,7 +17,7 @@ export default function EditName({ firstName, lastName }) {
         <h1>
           Welcome back
           <br />
-          {userProfile.firstName} {userProfile.lastName}!
+          {userProfile.firstName} {userProfile.lastName} !
         </h1>
         {isEditMode && (
           <button className="edit-button" onClick={editModeHandler}>
@@ -34,8 +32,8 @@ export default function EditName({ firstName, lastName }) {
             }}
           >
             <div className="buttonSection">
-              <input type="text" id="firstName" className="input-edit" placeholder={firstName} />
-              <input type="text" id="lastName" className="input-edit" placeholder={lastName} />
+              <input type="text" id="firstName" className="input-edit" placeholder="first name" />
+              <input type="text" id="lastName" className="input-edit" placeholder="last name" />
             </div>
             <div className="inputSection">
               <button type="submit">Save</button>
@@ -43,7 +41,7 @@ export default function EditName({ firstName, lastName }) {
                 Cancel
               </button>
             </div>
-            <div style={{ color: 'red', fontSize: '12px' }}>
+            <div style={{ color: 'red', fontSize: '14px' }}>
               <p>{messageInvalid}</p>
             </div>
           </form>

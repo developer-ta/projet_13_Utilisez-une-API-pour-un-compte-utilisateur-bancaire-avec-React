@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import './UserHeader.scss';
+import { useSelector } from 'react-redux';
 
 export default function UserHeader() {
+  const { userProfile } = useSelector((state) => state.UserProfileReducer);
+  const { firstName } = userProfile;
   return (
     <>
       <nav className="main-nav">
@@ -16,7 +19,7 @@ export default function UserHeader() {
         <div>
           <Link className="main-nav-item" to="/profile">
             <i className="fa fa-user-circle"></i>
-            Tony
+            {' ' + firstName}
           </Link>
           <Link className="main-nav-item" to="/home">
             <i className="fa fa-sign-out"></i>

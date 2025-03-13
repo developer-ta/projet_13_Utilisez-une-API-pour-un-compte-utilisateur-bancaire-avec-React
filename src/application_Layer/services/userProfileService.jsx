@@ -11,13 +11,18 @@ export default class UserProfileService {
 
   getToken() {
     const token = localStorage.getItem('authToken');
-    if (token) navigate('/login');
+    return token;
   }
 
   async updateProfile(token, data) {
-    console.log('data: ', data);
-    const { body } = await this._userProfileRepo.putUserProfile(token, data);
+    if (token) {
+      const res = await this._userProfileRepo.putUserProfile(token, data);
 
-    return body;
+      return res.body;
+    }
+  }
+
+  redirectionToLogin(navigate) {
+    navigate('/login');
   }
 }
