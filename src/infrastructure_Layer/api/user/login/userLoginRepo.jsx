@@ -9,14 +9,13 @@ export default class UserLoginRepo {
 
   postUserLogin = async (data) => {
     const result = await fetchWriteData(this.hrefUrl, this.requestMethod, data);
-    if (result) {
-      this.token = result;
 
-      return this.token;
+    if (!result) {
+      return undefined;
     }
-    return '';
+    this.token = result;
+    return this.token;
   };
-
   saveToken = (token) => {
     localStorage.setItem('authToken', JSON.stringify(token));
   };

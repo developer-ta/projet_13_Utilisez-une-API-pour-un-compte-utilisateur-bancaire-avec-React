@@ -48,11 +48,11 @@ profileService.redirectionToLogin(navigate)
 
   const editModeHandler = useCallback(() => {
     setIsEditMode((mode) => !mode);
-  });
+  },[]);
   const cancelHandler = useCallback(() => {
     setIsEditMode((mode) => !mode);
     setMessageInvalid((m) => (m = ''));
-  });
+  },[]);
 
   return {
     setUserProfile,

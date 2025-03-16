@@ -34,6 +34,11 @@ export default function useLogin() {
         'Veuillez saisir une adresse email valide. Le champ ne peut pas être vide et doit respecter le format correct'
       );
       return;
+    } else if (!loginData.passWord.trim()) {
+      setMessageInvalidEmail(
+        'Veuillez saisir une password valide. Le champ ne peut pas être vide !'
+      );
+      return;
     } else {
       setMessageInvalidEmail((m) => (m = ''));
     }
@@ -43,15 +48,14 @@ export default function useLogin() {
       email: loginData.email,
       password: loginData.passWord,
     });
-
-    loginData.token = resToken.body.token;
-
-    if (!loginData.passWord.trim() || !loginData.token) {
+    
+    if (!resToken) {
       setMessageInvalideIdentifie(
         "L'adresse email ou le mot de passe ne peut pas être vide et doit être correct. Veuillez vérifier vos informations et réessayer."
       );
       return;
     } else {
+      loginData.token = resToken.body.token;
       dispatch(setLogin({ ...loginData }));
       setMessageInvalideIdentifie((m) => (m = ''));
       loginService.toProfilePage(navigate, loginData.token);
@@ -59,7 +63,7 @@ export default function useLogin() {
     if (loginData.isAuthMemo) {
       loginService.persistToken(loginData.token);
     }
-  });
+  },[]);
 
   //   const loginData = {};
   //   loginData.passWord = formLoginData.password.value;
@@ -81,5 +85,3 @@ export default function useLogin() {
     messageInvalidEmail,
   };
 }
-
-

@@ -1,0 +1,23 @@
+[
+  {
+    "id": "x8349",
+    "accountType": "Checking",
+    "accountName": "Argent Bank Checking",
+    "availableBalance": 2082.79,
+    "status": "Available"
+  },
+  {
+    "id": "x6712",
+    "accountType": "Savings",
+    "accountName": "Argent Bank Savings",
+    "availableBalance": 10928.42,
+    "status": "Available"
+  },
+  {
+    "id": "x8349",
+    "accountType": "Credit Card",
+    "accountName": "Argent Bank Credit Card",
+    "availableBalance": 184.3,
+    "status": "Current"
+  }
+]

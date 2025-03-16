@@ -6,10 +6,14 @@ export default class UserLoginService {
   }
 
   async getToken(data) {
-    
-    const token = await this._userLoginRepo.postUserLogin(data);
+    console.log('data: ', data);
 
-    return token;
+    const token = await this._userLoginRepo.postUserLogin(data);
+    if (token) {
+      return token;
+    }
+    return undefined;
+    
   }
   persistToken(token) {
    

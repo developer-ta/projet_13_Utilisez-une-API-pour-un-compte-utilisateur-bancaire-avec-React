@@ -1,7 +1,7 @@
 import './EditName.scss';
 import useEditProfile from '../../../hooks/useEditProfile';
 
-export default function EditName({ firstName, lastName }) {
+export default function EditName() {
   const {
     userProfile,
     isEditMode,
