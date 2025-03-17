@@ -6,7 +6,7 @@ const userAccountSlice = createSlice({
   reducers: {
     setAccount: function (state, action) {
       const { payload } = action;
-      console.log('payload: ', payload);
+    
 
       state.userAccounts = payload;
     },

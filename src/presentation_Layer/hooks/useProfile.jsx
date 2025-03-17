@@ -9,21 +9,22 @@ import { UserProfile } from '../../domain_Layer/userProfile';
 export default function useProfile() {
   const { state } = useLocation();
   const { userProfile } = useSelector((state) => state.UserProfileReducer);
+
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const profileService = new UserProfileService(new UserProfileRepo());
-  const profile = new UserProfile();
+
 
   useEffect(() => {
     const fetchData = async () => {
       const token = state || profileService.getToken(navigate);
       const res = await profileService.getProfileData(token);
-
+   
+      
       dispatch(setProfile({ ...res }));
+  
     };
     fetchData();
   }, []);
-
-  return { userProfile };
 }

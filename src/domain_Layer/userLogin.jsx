@@ -10,23 +10,5 @@ export class UserLogin {
     this.isAuthSecede = false;
   }
 
-  toObject() {
-    return {
-      email: this.email,
-
-      firstName: this.firstName,
-
-      id: this.id,
-
-      isAuthMemo: this.isAuthMemo,
-
-      isAuthSecede: this.isAuthSecede,
-
-      lastName: this.lastName,
-
-      passWord: this.passWord,
-
-      token: this.token,
-    };
-  }
+ 
 }

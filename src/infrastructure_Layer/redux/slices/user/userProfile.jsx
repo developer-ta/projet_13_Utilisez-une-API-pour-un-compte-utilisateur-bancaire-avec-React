@@ -8,12 +8,14 @@ const userProfileSlice = createSlice({
   reducers: {
     setProfile: function (state, action) {
       const { payload } = action;
+     
 
       state.userProfile = payload;
+     
     },
     updateProfile: function (state, action) {
       const { firstName, lastName, id } = action.payload;
-      console.log(' action.payload: ', action.payload);
+  
 
       state.userProfile.firstName = firstName;
       state.userProfile.lastName = lastName;

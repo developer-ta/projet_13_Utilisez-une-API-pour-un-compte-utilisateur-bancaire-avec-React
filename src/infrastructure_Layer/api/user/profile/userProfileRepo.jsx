@@ -20,7 +20,7 @@ export default class UserProfileRepo {
     return null;
   };
   putUserProfile = async (token, profileData) => {
-	console.log('profileData: ', profileData);
+
     this.requestMethod = 'PUT';
     const result = await fetchWriteData(this.hrefUrl, this.requestMethod, profileData, token);
     if (result) {

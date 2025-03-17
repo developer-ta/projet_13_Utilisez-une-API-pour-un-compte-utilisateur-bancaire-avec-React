@@ -1,7 +1,12 @@
 import './EditName.scss';
 import useEditProfile from '../../../hooks/useEditProfile';
+import useProfile from '../../../hooks/useProfile';
 
 export default function EditName() {
+  //first: update user profile store 
+  useProfile();
+
+  //seconde: edit profile and update store profile
   const {
     userProfile,
     isEditMode,

@@ -64,20 +64,7 @@ export default function useLogin() {
       loginService.persistToken(loginData.token);
     }
   },[]);
-
-  //   const loginData = {};
-  //   loginData.passWord = formLoginData.password.value;
-  //   loginData.email = formLoginData.username.value;
-  //   console.log('formLoginData[2].checked: ', formLoginData[2].checked);
-  //   data.isAuthMemo = formLoginData[2].checked;
-  //   data.token = await loginService.getToken(loginData);
-  //   if (data.token) {
-  //     loginService.persistToken(data.token);
-  //   }
-  //   data = { ...data, ...loginData };
-  //   dispatch(setLogin(data));
-  //   console.log('data: ', data);
-  // });
+;
   return {
     setUserLogin,
     userLogin,

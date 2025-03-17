@@ -6,7 +6,7 @@ export default class UserLoginService {
   }
 
   async getToken(data) {
-    console.log('data: ', data);
+  
 
     const token = await this._userLoginRepo.postUserLogin(data);
     if (token) {
