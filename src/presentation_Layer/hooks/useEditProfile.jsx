@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import UserProfileService from '../../application_Layer/services/userProfileService';
 import UserProfileRepo from './../../infrastructure_Layer/api/user/profile/userProfileRepo';
