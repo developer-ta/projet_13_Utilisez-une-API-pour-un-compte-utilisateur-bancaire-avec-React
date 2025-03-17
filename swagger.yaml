@@ -81,8 +81,12 @@ paths:
           schema:
             type: object
             properties:
-              AccountId:
+              accountId:
                 type: string
+              page:
+                type: integer
+              itemsPerPage:
+                type: integer
       produces:
         - application/json
       responses:

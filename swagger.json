@@ -78,9 +78,9 @@
             "description": "Successfully retrieved of bank Accounts ",
             "schema": {
               "type": "array",
-               "items": {  
-        "$ref": "#/definitions/ApiAccountsResponse"  
-      } 
+              "items": {
+                "$ref": "#/definitions/ApiAccountsResponse"
+              }
             }
           },
           "400": {
@@ -93,7 +93,7 @@
       }
     },
     "/user/transaction": {
-           "post": {
+      "post": {
         "security": [
           {
             "Bearer": []
@@ -120,9 +120,15 @@
             "schema": {
               "type": "object",
               "properties": {
-                "AccountId":{
-                "type": "string"
-                  }
+                "accountId": {
+                  "type": "string"
+                },
+                "page": {
+                  "type": "integer"
+                },
+                "itemsPerPage": {
+                  "type": "integer"
+                }
               }
             }
           }
@@ -368,19 +374,19 @@
             "id": {
               "type": "string"
             },
-             "date": {
-          "type": "string"
-        },
-        "amount": {
-          "type": "number"
-        },
+            "date": {
+              "type": "string"
+            },
+            "amount": {
+              "type": "number"
+            },
             "balance": {
               "type": "number"
             },
-              "category": {
+            "category": {
               "type": "string"
             },
-               "notes": {
+            "notes": {
               "type": "string"
             },
             "transactionType": {

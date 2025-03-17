@@ -24,6 +24,6 @@ export async function fetchWriteData(hrefUrl, reqMethod, reqBody, token) {
     console.log(`Response status: ${res.status} => ${message}`);
     return res.json();
   } catch (error) {
-    console.log('error request not succeed!  ' + error);
+    console.log('error request not succeed! ' + error);
   }
 }
