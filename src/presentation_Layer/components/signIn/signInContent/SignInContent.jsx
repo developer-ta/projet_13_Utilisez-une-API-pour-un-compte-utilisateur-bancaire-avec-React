@@ -3,7 +3,7 @@ import './SignInContent.scss';
 import useLogin from '../../../hooks/useLogin';
 
 export default function SignInContent() {
-  const { setUserLogin, messageInvalidEmail, userLogin, messageInvalideIdentifie } = useLogin();
+  const { setUserLogin, messageInvalidEmail, messageInvalideIdentifie } = useLogin();
 
   return (
     <section className="sign-in-content">
@@ -31,10 +31,6 @@ export default function SignInContent() {
         <div style={{ color: 'red', fontSize: '10px' }}>
           <p>{messageInvalidEmail || messageInvalideIdentifie}</p>
         </div>
-
-        {/* <Link to="/profile" className="sign-in-button">
-          Sign In
-        </Link> */}
 
         <button className="sign-in-button">Sign In</button>
       </form>

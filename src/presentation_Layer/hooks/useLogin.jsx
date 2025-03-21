@@ -21,7 +21,7 @@ export default function useLogin() {
   const loginService = new UserLoginService(userLoginRepo);
   const loginData = new UserLogin();
 
-  //application layout
+  //application layer
   const setUserLogin = useCallback(async (formLoginData) => {
     loginData.passWord = formLoginData.password.value;
     loginData.email = formLoginData.username.value;

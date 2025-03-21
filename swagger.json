@@ -8,15 +8,11 @@
   },
   "host": "localhost:3001",
   "basePath": "/api/v1",
-  "schemes": [
-    "http"
-  ],
+  "schemes": ["http"],
   "paths": {
     "/user/login": {
       "post": {
-        "tags": [
-          "User Module"
-        ],
+        "tags": ["User Module"],
         "summary": "Login",
         "description": "API for Login",
         "parameters": [
@@ -30,9 +26,7 @@
             }
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "Login Successfully",
@@ -49,16 +43,14 @@
         }
       }
     },
-    "/user/bankAccount": {
+    "/user/accounts": {
       "post": {
         "security": [
           {
             "Bearer": []
           }
         ],
-        "tags": [
-          "User Module"
-        ],
+        "tags": ["User Module"],
         "summary": "User profile API",
         "description": "Get list of all accounts of back current",
         "parameters": [
@@ -70,80 +62,13 @@
             "required": true
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
-            "description": "Successfully retrieved of bank Accounts ",
+            "description": "get a list of transactions",
+
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ApiAccountsResponse"
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid fields provided in the request"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/user/transaction": {
-      "post": {
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
-        "tags": [
-          "User Module"
-        ],
-        "summary": "Get some transactions ",
-        "description": "",
-        "parameters": [
-          {
-            "in": "header",
-            "type": "string",
-            "name": "Authorization",
-            "description": "Attach Bearer JWT token",
-            "required": true
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Update user profile attributes",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "accountId": {
-                  "type": "string"
-                },
-                "page": {
-                  "type": "integer"
-                },
-                "itemsPerPage": {
-                  "type": "integer"
-                }
-              }
-            }
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Get list of bank Accounts Successfully",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ApiTransactionsResponse"
-              }
+              "$ref": "#/definitions/ApiAccountsResponse"
             }
           },
           "400": {
@@ -155,11 +80,349 @@
         }
       }
     },
+    "/user/{accountID}/transactions": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": ["User Module"],
+        "summary": "Get transactions for a specific account ID  ",
+        "description": "redivide transactions list for specific account, filtered by month, by default current month",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "type": "string",
+            "in": "header",
+            "required": true,
+            "description": "Attach Bearer JWT token",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "type": "string",
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "description": "Unique ID of account",
+            "schema": {
+              "type": "string",
+              "example": "x8349"
+            }
+          },
+          {
+            "type": "string",
+            "name": "month",
+            "in": "query",
+            "required": false,
+            "description": "The month to filter transactions, default is the current month (format: YYYY-MM)",
+            "schema": {
+              "type": "string",
+              "example": "2025-03"
+            }
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "get a list of transactions",
+
+            "schema": {
+              "$ref": "#/definitions/ApiAccountIDResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid Fields"
+          },
+          "404": {
+            "description": "transactions not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/{accountID}/transactions/{transactionID}": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": ["User Module"],
+        "summary": "Get single transaction by transaction ID  ",
+        "description": "get the details of a transaction for specific account",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "type": "string",
+            "in": "header",
+            "required": true,
+            "description": "Attach Bearer JWT token",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "type": "string",
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "description": "Unique ID of account",
+            "schema": {
+              "type": "string",
+              "example": "x8349"
+            }
+          },
+          {
+            "type": "string",
+            "name": "transactionID",
+            "in": "path",
+            "required": true,
+            "description": "Unique ID of transaction",
+            "schema": {
+              "type": "string",
+              "example": "8349"
+            }
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "get a list of transactions",
+
+            "schema": {
+              "$ref": "#/definitions/ApiTransactionsResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid Fields"
+          },
+          "404": {
+            "description": "transactions not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+
+      "patch": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": ["User Module"],
+        "summary": "update partielle  transaction by transaction ID  ",
+        "description": "redivide status operation and message",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "type": "string",
+            "in": "header",
+            "required": true,
+            "description": "Attach Bearer JWT token",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "type": "string",
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "description": "Unique ID of account",
+            "schema": {
+              "type": "string",
+              "example": "x8349"
+            }
+          },
+          {
+            "type": "string",
+            "name": "transactionID",
+            "in": "path",
+            "required": true,
+            "description": "Unique ID of transaction",
+            "schema": {
+              "type": "string",
+              "example": "8349"
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Update user profile attributes",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/updateTransaction"
+            }
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": " update transaction successfully",
+
+            "schema": {
+              "$ref": "#/definitions/ApiUpdateTransactionsResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid Fields"
+          },
+          "404": {
+            "description": "transactions not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": ["User Module"],
+        "summary": "update totale one transaction by transaction ID  ",
+        "description": "redivide transactions id like message ",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "type": "string",
+            "in": "header",
+            "required": true,
+            "description": "Attach Bearer JWT token",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "type": "string",
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "description": "Unique ID of account",
+            "schema": {
+              "type": "string",
+              "example": "x8349"
+            }
+          },
+          {
+            "type": "string",
+            "name": "transactionID",
+            "in": "path",
+            "required": true,
+            "description": "Unique ID of transaction",
+            "schema": {
+              "type": "string",
+              "example": "8349"
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Update totale attributes",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiPutTransactionsResponse"
+            }
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": " update transaction successfully",
+
+            "schema": {
+              "$ref": "#/definitions/ApiUpdateTransactionsResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid Fields"
+          },
+          "404": {
+            "description": "transactions not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": ["User Module"],
+        "summary": "delete one transaction by transaction ID  ",
+        "description": "This can only be done by the logged in transaction",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "type": "string",
+            "in": "header",
+            "required": true,
+            "description": "Attach Bearer JWT token",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "type": "string",
+            "name": "accountID",
+            "in": "path",
+            "required": true,
+            "description": "Unique ID of account",
+            "schema": {
+              "type": "string",
+              "example": "x8349"
+            }
+          },
+          {
+            "type": "string",
+            "name": "transactionID",
+            "in": "path",
+            "required": true,
+            "description": "Unique ID of transaction",
+            "schema": {
+              "type": "string",
+              "example": "8349"
+            }
+          }
+        ],
+
+        "responses": {
+          "204": {
+            "description": " delete transaction successfully"
+          },
+          "400": {
+            "description": "Invalid Fields"
+          },
+          "404": {
+            "description": "transactions not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+
     "/user/signup": {
       "post": {
-        "tags": [
-          "User Module"
-        ],
+        "tags": ["User Module"],
         "summary": "Signup",
         "description": "API for Signup",
         "parameters": [
@@ -173,9 +436,7 @@
             }
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "Signup Successfully",
@@ -199,9 +460,7 @@
             "Bearer": []
           }
         ],
-        "tags": [
-          "User Module"
-        ],
+        "tags": ["User Module"],
         "summary": "User Profile API",
         "description": "API for fetching a user profile",
         "parameters": [
@@ -213,9 +472,7 @@
             "required": true
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "User profile retrieved successfully",
@@ -237,9 +494,7 @@
             "Bearer": []
           }
         ],
-        "tags": [
-          "User Module"
-        ],
+        "tags": ["User Module"],
         "summary": "User Profile API",
         "description": "API for updating a user profile",
         "parameters": [
@@ -260,9 +515,7 @@
             }
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "User profile retrieved successfully",
@@ -329,73 +582,156 @@
       }
     },
     "ApiAccountsResponse": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "accountID": {
+            "type": "string"
+          },
+          "accountType": {
+            "type": "string"
+          },
+          "accountName": {
+            "type": "string"
+          },
+          "availableBalance": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ApiAccountIDResponse": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "integer"
-        },
-        "message": {
+        "accountID": {
           "type": "string"
         },
-        "body": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "accountType": {
-              "type": "string"
-            },
-            "accountName": {
-              "type": "string"
-            },
-            "availableBalance": {
-              "type": "number"
-            },
-            "status": {
-              "type": "string"
+        "transactions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "transactionID": {
+                "type": "string"
+              },
+              "date": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string",
+                "example": "Golden son Bakery"
+              },
+              "amount": {
+                "type": "number",
+                "example": "$5.00"
+              },
+              "balance": {
+                "type": "number",
+                "example": "$2082.79"
+              }
             }
           }
+        }
+      }
+    },
+    "ApiUpdateTransactionsResponse": {
+      "type": "object",
+      "properties": {
+        "transactionID": {
+          "type": "string"
+        },
+        "status": {
+          "type": "number"
+        },
+        "message": {
+          "type": "string",
+          "example": "update transaction successfully"
         }
       }
     },
     "ApiTransactionsResponse": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "integer"
-        },
-        "message": {
+        "transactionID": {
           "type": "string"
         },
-        "body": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "date": {
-              "type": "string"
-            },
-            "amount": {
-              "type": "number"
-            },
-            "balance": {
-              "type": "number"
-            },
-            "category": {
-              "type": "string"
-            },
-            "notes": {
-              "type": "string"
-            },
-            "transactionType": {
-              "type": "string"
+        "transactions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string"
+              },
+              "category": {
+                "type": "string",
+                "example": "Golden son Bakery"
+              },
+              "notes": {
+                "type": "string",
+                "example": "Golden son Bakery"
+              },
+              "description": {
+                "type": "string",
+                "example": "Golden son Bakery"
+              },
+              "transactionType": {
+                "type": "string",
+                "example": "Golden son Bakery"
+              },
+              "amount": {
+                "type": "number",
+                "example": "$5.00"
+              },
+              "balance": {
+                "type": "number",
+                "example": "$2082.79"
+              }
             }
           }
         }
       }
     },
+    "ApiPutTransactionsResponse": {
+      "type": "object",
+      "properties": {
+        "transactionID": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string",
+          "example": "Golden son Bakery"
+        },
+        "notes": {
+          "type": "string",
+          "example": "Golden son Bakery"
+        },
+        "description": {
+          "type": "string",
+          "example": "Golden son Bakery"
+        },
+        "transactionType": {
+          "type": "string",
+          "example": "Golden son Bakery"
+        },
+        "amount": {
+          "type": "number",
+          "example": "$5.00"
+        },
+        "balance": {
+          "type": "number",
+          "example": "$2082.79"
+        }
+      }
+    },
+
     "ApiResponse": {
       "type": "object",
       "properties": {
@@ -434,6 +770,23 @@
         },
         "lastName": {
           "type": "string"
+        }
+      }
+    },
+    "updateTransaction": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string",
+          "example": "Golden son Bakery"
+        },
+        "notes": {
+          "type": "string",
+          "example": "Golden son Bakery"
+        },
+        "description": {
+          "type": "string",
+          "example": "Golden son Bakery"
         }
       }
     }

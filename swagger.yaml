@@ -60,7 +60,7 @@ paths:
           description: Invalid fields provided in the request
         '500':
           description: Internal server error
-  /user/transaction:
+  /user/transactions:
     post:
       security:
         - Bearer: []
